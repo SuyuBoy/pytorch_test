@@ -259,5 +259,5 @@ if __name__ == "__main__":
     # multiprocessing.set_start_method('spawn')
     # multiprocessing.resource_tracker._remove_resources()
 
-    ai = GA(rate_of_excell= 0.70, random_of_last= 0.05)
+    ai = GA(rate_of_excell= 0.70, random_of_last= 0.05, floder="saved_models")
     ai.GALoop()

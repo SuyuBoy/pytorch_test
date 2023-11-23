@@ -31,10 +31,10 @@ class Window:
     Message=0
     state = True
     
-    def __init__(self, name = "Game", Realgame : gamelogic.Game = None, floder = 'saved_models'):
+    def __init__(self, name = "Ai Teaches You Play Game", Realgame : gamelogic.Game = None, floder = 'saved_models', ifAiPlay = True):
         self.waittime = 300
         self.winRoot = self.tkinter.Tk()
-        self.winRoot.title('Ai Teaches You Play Game')
+        self.winRoot.title(name)
         self.winRoot.geometry('600x600')
         self.buttons = self.tkinter.Frame()
         if Realgame == None:
@@ -43,6 +43,7 @@ class Window:
             self.game = Realgame
         self.folder = floder
         self.lastKey = 0
+        self.ifAiplay = ifAiPlay
             # self.ai = tenserokay.Ai(RealGame=Realgame)
             
         def btn1Messctl():
@@ -79,6 +80,7 @@ class Window:
 
 
     def windowLoop(self):
+        #自动回调函数
         def additional_code():
             # model = Controller()
             
@@ -106,13 +108,13 @@ class Window:
                 return
             self.winRoot.after(self.waittime, additional_code)
 
-
-        self.winRoot.after(self.waittime, additional_code)
-        load_path = os.path.join('saved_models', f'model_{2}.pth')
-        model = Controller()
-        model.load_state_dict(torch.load(load_path))
-        for param in model.parameters():
-            print(param)
+        if self.ifAiplay == True:
+            self.winRoot.after(self.waittime, additional_code)
+            load_path = os.path.join('saved_models', f'model_{2}.pth')
+            model = Controller()
+            model.load_state_dict(torch.load(load_path))
+            for param in model.parameters():
+                print(param)
                 
         self.winRoot.mainloop()
 
@@ -155,9 +157,11 @@ class Window:
 def receive_data():
     
     pass
-        
+
+
+
 realgame = gamelogic.Game()
-game = Window(Realgame=realgame)
+game = Window(Realgame=realgame, ifAiPlay=True, floder="saved_models")
 
 
 game.windowLoop()
