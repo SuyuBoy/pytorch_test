@@ -220,7 +220,6 @@ class GA:
                 save_path = os.path.join(self.save_folder, f'model_{i}.pth')
                 torch.save(model.state_dict(), save_path)
             
-
     def genetic_algorithm(self):
 
 
