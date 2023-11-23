@@ -2,7 +2,7 @@ import torch
 import multiprocessing
 import gamelogic
 import random
-import torch.cuda
+# import torch.cuda
 import copy
 import os
 
